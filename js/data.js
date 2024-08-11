@@ -31,9 +31,6 @@ const DESCRIPTIONS = [
   'Без комментариев',
 ];
 
-const generateId = getUniqRandomIntFromRange(1, 25);
-const generatePhotoId = getUniqRandomIntFromRange(1, 25);
-
 let authorId = 1;
 
 const createComment = () => ({
@@ -42,15 +39,17 @@ const createComment = () => ({
   message: `${getRandomArrayElement(MESSAGES) } ${ getRandomArrayElement(MESSAGES)}`,
   name: getRandomArrayElement(NAMES)});
 
-const createObject = () => ({
-  id: generateId(),
-  url: `photos/${ generatePhotoId() }.jpg`,
+const createPicture = () => ({
+  id: getUniqRandomIntFromRange(1, 25)(),
+  url: `photos/${ getUniqRandomIntFromRange(1, 25)() }.jpg`,
   description: getRandomArrayElement(DESCRIPTIONS),
   likes: getRandomInteger(15, 200),
   comments: Array.from({length: getRandomInteger(0, 30)}, createComment),
 });
 
-const similarObject = Array.from({length: 25}, createObject);
+const createPictures = () => Array.from({length: 25}, createPicture);
 // выводим результат в консоль в виде JSON, иначе не видно значений ключа comments
 // console.log(JSON.stringify(similarObject, null, 2));
-console.log(similarObject);
+//console.log(similarObject);
+
+export {createPictures};
